@@ -69,7 +69,7 @@ const Calculator = () => {
           '4',
           '5',
           '6',
-          'x',
+          '*',
           '1',
           '2',
           '3',
@@ -134,7 +134,7 @@ const Button = ({ label, onClick }) => {
   // Assign colors to buttons based on type
   const getButtonColor = (label) => {
     if (['C', 'DEL', '='].includes(label)) return 'bg-red-600 hover:bg-red-700';
-    if (['+', '-', 'x', '/', '^', '√', 'x^2', 'x^y'].includes(label)) return 'bg-blue-600 hover:bg-blue-700';
+    if (['+', '-', '*', '/', '^', '√', 'x^2', 'x^y'].includes(label)) return 'bg-blue-600 hover:bg-blue-700';
     if (['sin', 'cos', 'tan', 'log', 'ln', 'π', 'e', '!'].includes(label)) return 'bg-green-600 hover:bg-green-700';
     return 'bg-gray-700 hover:bg-gray-800';
   };
