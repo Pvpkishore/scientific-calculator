@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { evaluate, factorial, sqrt, pow } from 'mathjs';
+import { evaluate, factorial, sqrt, pow, sin, cos, tan } from 'mathjs';
 import { gsap } from 'gsap';
 
 const Calculator = () => {
@@ -7,44 +7,46 @@ const Calculator = () => {
   const [history, setHistory] = useState([]);
 
   const handleButtonClick = (value) => {
-    if (value === '=') {
-      try {
+    try {
+      if (value === '=') {
         const result = evaluate(input);
         setHistory([...history, `${input} = ${result}`]);
         setInput(result.toString());
-      } catch {
-        setInput('Error');
-      }
-    } else if (value === 'C') {
-      setInput('');
-    } else if (value === 'DEL') {
-      setInput(input.slice(0, -1));
-    } else if (value === 'π') {
-      setInput(input + Math.PI.toFixed(8));
-    } else if (value === 'e') {
-      setInput(input + Math.E.toFixed(8));
-    } else if (value === 'sin') {
-      setInput(input + `sin(`);
-    } else if (value === 'cos') {
-      setInput(input + `cos(`);
-    } else if (value === 'tan') {
-      setInput(input + `tan(`);
-    } else if (value === 'log') {
-      setInput(input + `log10(`);
-    } else if (value === 'ln') {
-      setInput(input + `log(`);
-    } else if (value === '√') {
-      setInput(input + `sqrt(`);
-    } else if (value === '!') {
-      try {
+      } else if (value === 'C') {
+        setInput('');
+      } else if (value === 'DEL') {
+        setInput(input.slice(0, -1));
+      } else if (value === 'π') {
+        setInput(input + Math.PI.toFixed(8));
+      } else if (value === 'e') {
+        setInput(input + Math.E.toFixed(8));
+      } else if (value === 'sin') {
+        setInput(input + `sin(`);
+      } else if (value === 'cos') {
+        setInput(input + `cos(`);
+      } else if (value === 'tan') {
+        setInput(input + `tan(`);
+      } else if (value === 'log') {
+        setInput(input + `log10(`);
+      } else if (value === 'ln') {
+        setInput(input + `log(`);
+      } else if (value === '√') {
+        setInput(input + `sqrt(`);
+      } else if (value === '!') {
         const result = factorial(evaluate(input));
         setHistory([...history, `${input}! = ${result}`]);
         setInput(result.toString());
-      } catch {
-        setInput('Error');
+      } else if (value === 'x^2') {
+        setInput(input + `^2`);
+      } else if (value === 'x^y') {
+        setInput(input + `^`);
+      } else if (value === '(' || value === ')') {
+        setInput(input + value);
+      } else {
+        setInput(input + value);
       }
-    } else {
-      setInput(input + value);
+    } catch {
+      setInput('Error');
     }
   };
 
@@ -62,6 +64,10 @@ const Calculator = () => {
       {/* Buttons */}
       <div className="grid grid-cols-4 sm:grid-cols-4 gap-2">
         {[
+          '(',
+          ')',
+          'C',
+          'DEL',
           '7',
           '8',
           '9',
@@ -87,8 +93,6 @@ const Calculator = () => {
           'e',
           '^',
           '√',
-          'C',
-          'DEL',
           '!',
           'x^2',
           'x^y',
